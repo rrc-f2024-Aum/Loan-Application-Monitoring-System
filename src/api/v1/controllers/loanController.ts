@@ -107,5 +107,32 @@ export const getLoanById = async (
 };  
 
 // update loan by ID 
+export const updateLoan = async(
+    req: Request, res: Response, next: NextFunction
+): Promise<void> => {
+    try {
+        const loanId = validateLoanId(req, res);
+        if (loanId === null) return;
+        
+        if (handleLoanNotFound(res, loanId)) return;
+
+        const { applicant, amount, status } = req.body;
+        const loanIndex = findLoanIndex(loanId);
+
+        sampleData[loanIndex] = {
+            ...sampleData[loanIndex],
+            applicant: applicant || sampleData[loanIndex].applicant,
+            amount: amount ? Number(amount) : sampleData[loanIndex].amount,
+            status: status || sampleData[loanIndex].status
+        };
+
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(sampleData[loanIndex], "Loan application updated successfully")
+        );
+    
+    } catch (error) {
+        next(error);
+    }
+}
 
 // delete loan by ID
