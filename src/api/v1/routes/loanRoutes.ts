@@ -14,9 +14,10 @@ const router = express.Router();
 // Get - health check endpoint
 router.get("/health", (req,res) =>{
     res.status(200).json({
-        success: true,
-        message: 'OK',
-        timestamp: new Date().toISOString()
+        status: "Ok",
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+        version: "1.0.0"
     });
 });
 
