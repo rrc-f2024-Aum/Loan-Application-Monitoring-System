@@ -1,0 +1,46 @@
+{
+  "name": "loan-application-monitoring-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrc-f2024-Aum/Loan-Application-Monitoring-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rrc-f2024-Aum/Loan-Application-Monitoring-System/issues"
+  },
+  "homepage": "https://github.com/rrc-f2024-Aum/Loan-Application-Monitoring-System#readme",
+  "dependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^7.2.0",
+    "express": "^5.2.1",
+    "firebase": "^12.10.0",
+    "firebase-admin": "^13.7.0",
+    "jest": "^30.3.0",
+    "joi": "^18.0.2",
+    "morgan": "^1.10.1",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
