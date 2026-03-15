@@ -3,6 +3,43 @@ import { Loan, sampleData } from "../models/loanModel";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { errorResponse, successResponse } from "../models/responseModel" 
 
+// Helper functions
+const validateLoanId = (req: Request, res: Response): number | null => {
+    const { id } = req.params;
+
+    if (Array.isArray(id)) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json(
+            errorResponse("Invalid loan ID format", "INVALID_ID_FORMAT")
+        );
+        return null;
+    }
+
+    const loanId = parseInt(id);
+    if (isNaN(loanId)) {
+        res.status(HTTP_STATUS.BAD_REQUEST).json(
+            errorResponse("Invalid loan ID", "INVALID_ID")
+        );
+        return null;
+    }
+
+    return loanId;
+}
+
+const findLoanIndex = (loanId: number): number => {
+    return sampleData.findIndex(l => l.id === loanId);
+}
+
+const handleLoanNotFound = (res: Response, loanId: number): boolean => {
+    const index = findLoanIndex(loanId);
+    if (index === -1) {
+        res.status(HTTP_STATUS.NOT_FOUND).json(
+            errorResponse("Loan application not found", "LOAN_NOT_FOUND")
+        );
+        return true;
+    }
+    return false;
+};
+
 // create loan
 export const createLoan = async(
     req: Request, res: Response, next: NextFunction
