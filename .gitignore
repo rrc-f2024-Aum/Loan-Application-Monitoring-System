@@ -1,2 +1,7 @@
 node_modules/
 dist/
+logs/
+*.log
+
+#FB key
+service-account-key.json
