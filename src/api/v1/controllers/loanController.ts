@@ -36,6 +36,18 @@ export const createLoan = async(
 }
 
 // get all loans
+export const getLoans = async(
+    req: Request, res: Response, next: NextFunction
+): Promise<void> => {
+    try {
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(sampleData, "Loan applications retrieved successfully", 
+                sampleData.length)
+        );
+    } catch (error) {
+        next(error);
+    }
+};
 
 // get loan by ID
 
