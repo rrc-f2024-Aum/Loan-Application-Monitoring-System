@@ -136,3 +136,20 @@ export const updateLoan = async(
 }
 
 // delete loan by ID
+export const deleteLoan = async(
+    req:Request, res: Response, next: NextFunction
+): Promise<void> => {
+    try {
+        const loanId = validateLoanId(req, res);
+        if (loanId === null) return;
+        
+        if (handleLoanNotFound(res, loanId)) return;
+
+        const loanIndex = findLoanIndex(loanId);
+        sampleData.splice(loanIndex, 1);
+        res.status(HTTP_STATUS.NO_CONTENT).send();
+    
+    } catch (error) {
+        next(error);
+    }
+};
