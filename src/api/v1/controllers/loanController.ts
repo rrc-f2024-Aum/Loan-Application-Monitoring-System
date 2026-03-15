@@ -87,6 +87,24 @@ export const getLoans = async(
 };
 
 // get loan by ID
+export const getLoanById = async (
+    req: Request, res: Response, next: NextFunction
+): Promise<void> => {
+    try {
+        const loanId = validateLoanId(req, res);
+        if (loanId === null) return;
+        
+        if (handleLoanNotFound(res, loanId)) return;
+
+        const loan = sampleData[findLoanIndex(loanId)];
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(loan, "Loan application retrieved successfully")
+        );
+    
+    } catch (error) {
+        next(error);
+    }
+};  
 
 // update loan by ID 
 
